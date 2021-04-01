@@ -69,7 +69,7 @@ class CurrencyController extends Controller
         Currency::find($id)->update($request->only(['country','ammount']));
         return 'Success';
     }
-
+//te
     /**
      * Remove the specified resource from storage.
      *
