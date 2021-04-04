@@ -1,13 +1,16 @@
 @extends('backend.admin.layouts.master')
 @section('title','Currency')
-
+@push('css')
+ <link rel="stylesheet" href="http://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+@endpush
 @section('master_content')
 <div class="container-fluid mt-2">
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Manage Currency</h3>
+                    <button class="btn btn-primary "  data-toggle="modal" data-target="#exampleModal">Add New Currency</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -27,13 +30,22 @@
                 </div>
             </div>
         </div>
-         <div class="col-12 col-md-4">
-            <div class="card" id="addCurrencyCard">
-                <div class="card-header">
-                    <h3 class="card-title" id="addTitle">Add New Currency</h3>
-                </div>
-                <div class="card-body">
-                    <form action="" id="addCurrencyForm">
+       
+    </div>
+</div>
+
+
+ <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Currency</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <form action="" id="addCurrencyForm">
                         <div class="form-group">
                             <label for="">Country Name : </label>
                             <input type="text" class="form-control" placeholder="Enter Country Name" id="country">
@@ -47,15 +59,24 @@
                          <div class="form-group">
                             <button class="btn btn-block btn-success" id="addButton">Add New Currency</button>
                         </div>
-                    </form>
-                </div>
-            </div>
-             <div class="card" id="editCurrencyCard">
-                <div class="card-header">
-                    <h3 class="card-title" id="addTitle">Edit Currency</h3>
-                </div>
-                <div class="card-body">
-                    <form action="" id="updateCurrencyForm">
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" id="updateCurrencyForm">
                         <div class="form-group">
                             <label for="">Country Name : </label>
                             <input type="text" class="form-control" placeholder="Enter Country Name" id="e_country">
@@ -71,17 +92,14 @@
                             <button class="btn btn-block btn-success" id="addButton">Update Currency</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
- 
 @stop
 
 @push('script')
+<script src="http://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script>
         function table_data_row(data) {
             var	rows = '';
@@ -106,10 +124,10 @@
             .then(function(res){
                // console.log(res);
                 table_data_row(res.data);
+              $('.dataTable').DataTable();
             })
         }
         getAllCurrency();
-
 
 
         //delete currency
@@ -176,7 +194,8 @@
              $('#country').val('')
              $('#ammount').val('')
              setSwalMessage()
-           console.log(response.data)
+          // console.log(response.data)
+          $('.modal').modal('toggle')
            
         })
         .catch(function (error) {
@@ -196,8 +215,7 @@
 
     //edit
     $('body').on('click','#editRow',function(){
-        editCurrencyCard.show()
-        addCurrencyCard.hide()
+      
         let id = $(this).data('id')
         let url = base_path + '/currency' + '/'  + id + '/edit'
        // console.log(url);
@@ -206,6 +224,7 @@
                 $('#e_country').val(res.data.country)
                 $('#e_ammount').val(res.data.ammount)
                 $('#e_id').val(res.data.id)
+
             })
     })
 
@@ -223,9 +242,9 @@
         axios.put(url,data)
         .then(function(res){
             getAllCurrency();
+             $('#editModal').modal('toggle')
             setSwalMessage('success','Success','Data Update Successfully!');
-            editCurrencyCard.hide()
-            addCurrencyCard.show()
+           
             //console.log(res);
         })
     })
