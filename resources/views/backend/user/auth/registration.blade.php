@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title' ,'Admin Login')
+@section('title' ,'User Registraion')
 
 @push('css')
 <style>
@@ -56,30 +56,38 @@
             </div>
             <div class="card mt-0">
                 <div class="header">
-                    <p class="lead">Admin Login to your account</p>
+                    <p class="lead">User Registraion to your account</p>
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" action="{{ route('admin.login') }}" method="POST">
+                    <form class="form-auth-small" action="{{ route('user.registration') }}" method="POST">
                         @csrf
+                         <div class="form-group c_form_group">
+                            <input type="text" class="form-control" placeholder="Enter your name" name="name" value="{{  old('name') }}">
+                                <span class="text-danger">{{($errors->has('name'))? ($errors->first('name')) : ''}}</span>
+                        </div>
                         <div class="form-group c_form_group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" placeholder="Enter your email address" name="email">
+                            <input type="email" class="form-control" placeholder="Enter your email address" name="email" value="{{  old('email') }}">
                                 <span class="text-danger">{{($errors->has('email'))? ($errors->first('email')) : ''}}</span>
                         </div>
                         <div class="form-group c_form_group">
-                            <label>Password</label>
                             <input type="password" class="form-control" placeholder="Enter your password" name="password">
                                 <span class="text-danger">{{($errors->has('password'))? ($errors->first('password')) : ''}}</span>
                         </div>
-                        <div class="form-group clearfix">
-                            <label class="fancy-checkbox element-left">
-                                <input type="checkbox">
-                                <span>Remember me</span>
-                            </label>
+                        <div class="form-group c_form_group">
+                            <input type="password" class="form-control" placeholder="Confirm password" name="password_confirmation">
+                                <span class="text-danger">{{($errors->has('password_confirmation'))? ($errors->first('password_confirmation')) : ''}}</span>
                         </div>
-                        <button type="submit" class="btn btn-dark btn-lg btn-block">LOGIN</button>
+                          <div class="form-group c_form_group">
+                            <select name="role" id="" class="form-control">
+                                <option value="">Select A Role</option>
+                                <option value="user">User</option>
+                                <option value="merchant">Merchant</option>
+                            </select>
+                                <span class="text-danger">{{($errors->has('role'))? ($errors->first('role')) : ''}}</span>
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-lg btn-block">REGISTRATION</button>
                         <div class="bottom">
-                            <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
+                            <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="{{ url('/') }}">Sign up your account...</a></span>
                         </div>
                     </form>
                 </div>
