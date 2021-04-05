@@ -16,6 +16,14 @@
 <body data-theme="light">
 
 <div id="body" class="theme-orange">
+    @if(session('message'))
+           <div class="alert alert-{{ session('type') }} alert-dismissible fade show" role="alert">
+              {{ session('message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+           @endif
 
   @yield('app_content')
     <script src="{{ asset('js/app.js') }}"></script>

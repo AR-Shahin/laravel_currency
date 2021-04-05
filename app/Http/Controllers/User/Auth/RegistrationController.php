@@ -6,8 +6,11 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use App\Http\Requests\UserRegistrationRequest;
+use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Notifications\UserEmailVerificationNotification;
+use Carbon\Carbon;
 
 class RegistrationController extends Controller
 {
@@ -23,11 +26,12 @@ class RegistrationController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = $request->input('password');
-            $user->token = $request->input('email');
+            $user->token = md5($request->input('email')) . uniqid();
             $user->role = $request->input('role');
             if($user->save()){
                 $user->notify(new UserEmailVerificationNotification($user));
-                return 222;
+                $this->setSuccessMessage('Please verify your account!');
+                return back();
             }
         } catch (Exception $e) {
 
@@ -36,6 +40,23 @@ class RegistrationController extends Controller
     }
     public function verifyUserViaEmail($token)
     {
-       return $token;
+        $user = User::where('token', $token)->first();
+        if (!$user) {
+            //invalid token
+            $this->setErrorMessage('Invalid Token');
+            return redirect('/');
+
+        }
+        //update
+        try {
+            $user->token = null;
+            $user->is_verified = true;
+            $user->email_verified_at = now();
+            $user->save();
+            auth()->guard('web')->login($user);
+            return redirect(RouteServiceProvider::HOME);
+        }catch(Exception $e){
+
+        }
     }
 }

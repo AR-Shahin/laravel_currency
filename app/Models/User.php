@@ -34,8 +34,5 @@ class User extends Authenticatable
     {
        $this->attributes['password'] = bcrypt($value);
     }
-    public function setTokenAttribute($value)
-    {
-        $this->attributes['token'] = md5($value) . uniqid();
-    }
+   
 }
