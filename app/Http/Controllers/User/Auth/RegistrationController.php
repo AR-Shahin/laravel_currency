@@ -49,14 +49,14 @@ class RegistrationController extends Controller
         }
         //update
         try {
-            $user->token = null;
+            $user->token = '';
             $user->is_verified = true;
             $user->email_verified_at = now();
             $user->save();
             auth()->guard('web')->login($user);
-            return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::USER_HOME);
         }catch(Exception $e){
-
+            dd($e);
         }
     }
 }

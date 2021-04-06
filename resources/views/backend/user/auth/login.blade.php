@@ -18,7 +18,6 @@
 
 @section('app_content')
 <div id="body" class="theme-cyan">
-
     <!-- Theme Setting -->
     <div class="themesetting">
         <a href="javascript:void(0);" class="theme_btn"><i class="fa fa-gear fa-spin"></i></a>
@@ -59,14 +58,17 @@
                     <p class="lead">Login to your account</p>
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" action="index.html">
+                    <form class="form-auth-small" action="{{ route('user.login') }}" method="POST">
+                        @csrf
                         <div class="form-group c_form_group">
                             <label>Email</label>
-                            <input type="email" class="form-control" placeholder="Enter your email address">
+                            <input type="email" class="form-control" placeholder="Enter your email address" name="email">
+                            <span class="text-danger">{{($errors->has('email'))? ($errors->first('email')) : ''}}</span>
                         </div>
                         <div class="form-group c_form_group">
                             <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Enter your password">
+                            <input type="password" class="form-control" placeholder="Enter your password" name="password">
+                            <span class="text-danger">{{($errors->has('password'))? ($errors->first('password')) : ''}}</span>
                         </div>
                         <div class="form-group clearfix">
                             <label class="fancy-checkbox element-left">
