@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_verified')->default(false);
             $table->enum('role',  ['user', 'merchant'])->default('user');
             $table->tinyInteger('status')->default(1);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

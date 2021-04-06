@@ -16,7 +16,8 @@ class LoginController extends Controller
     public function processLogin(UserLoginRequest $request)
     {
         $credentials = $request->validated();
-        if (Auth::guard('web')->attempt($credentials)) {
+        $remember_me = $request->has('remember_me') ? true : false;
+        if (Auth::guard('web')->attempt($credentials, $remember_me)) {
             //check verify
             if (isCredentialVerified($request->input('email'))) {
                 //check status
