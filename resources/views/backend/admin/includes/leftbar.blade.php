@@ -15,8 +15,8 @@
                         <li class="header">Main</li>
                         <li class="active"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                         <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>Currency</span></a></li>
-                     
-                        
+                     <li><a href="{{ route('get-all-users') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+
                     </ul>
                 </nav>
             </div>

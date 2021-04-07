@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,4 +24,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
 Route::resource('currency', CurrencyController::class)->middleware('auth:admin');
 Route::get('get-currency',[CurrencyController::class,'getAllCurrency'])->middleware('auth:admin')->name('get-all-currency');
 
+//User Routes
+Route::get('get-all-users', [UserController::class,'index'])->name('get-all-users');
 

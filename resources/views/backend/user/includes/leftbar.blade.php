@@ -14,9 +14,11 @@
                     <ul id="main-menu" class="metismenu animation-li-delay">
                         <li class="header">Main</li>
                         <li class="active"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                        <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>Currency</span></a></li>
-                     
-                        
+                        @can('isUser')
+                            <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>User</span></a></li>
+                        @else
+                            <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>Merchant</span></a></li>
+                        @endcan
                     </ul>
                 </nav>
             </div>
