@@ -12,6 +12,7 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/css/mooli.min.css">
     @stack('css')
+
 </head>
 <body data-theme="light">
 
