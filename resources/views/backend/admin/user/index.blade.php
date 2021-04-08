@@ -37,6 +37,7 @@
                                             <a href="" class="btn btn-sm btn-primary">View</a>
                                             <a href="" class="btn btn-sm btn-danger">Delete</a>
                                             <a href="" class="btn btn-sm btn-warning">Block</a>
+                                            <a href="{{ url('add-money' . '/' .$user->email) }}" class="btn btn-sm btn-secondary">Add Money</a>
                                         </td>
                                     </tr>
                                 @empty

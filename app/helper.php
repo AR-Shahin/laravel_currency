@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Balance;
 use App\Models\User;
 
 //this function for check a user status active ot not
@@ -26,5 +27,13 @@ if(!function_exists('isCredentialVerified')){
 
             return false;
         }
+    }
+}
+
+//this function return a specific user balance
+if(!function_exists('getMyBalance')){
+    function getMyBalance($id){
+        $balance = Balance::select('amount')->where('user_id', $id)->first();
+        return $balance ? $balance->amount : 0;
     }
 }

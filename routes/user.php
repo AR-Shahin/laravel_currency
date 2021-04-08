@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\Auth\RegistrationController;
+use App\Http\Controllers\User\MoneyRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('user', 'backend.user.auth.registration');
@@ -22,6 +23,10 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
         //Dashboard Routes
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+        Route::get('money-request', [MoneyRequestController::class, 'index'])->name('money-request');
+        Route::get('check-email/{email}', [MoneyRequestController::class, 'checkValidEmail'])->name('check-email');
     });
 
 });
+
+

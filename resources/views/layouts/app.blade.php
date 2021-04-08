@@ -24,7 +24,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-           @endif
+    @endif
 
   @yield('app_content')
     <script src="{{ asset('js/app.js') }}"></script>

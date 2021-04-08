@@ -31,4 +31,9 @@ class Controller extends BaseController
         session()->flash('front_message', $message);
         session()->flash('type', 'danger');
     }
+    public function setSuccessMessageForDashboard($message)
+    {
+        session()->flash('dash_message', $message);
+        session()->flash('type', 'success');
+    }
 }

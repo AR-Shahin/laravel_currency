@@ -24,57 +24,10 @@
                                 </div>
                             </li>
                             <li class="dropdown hidden-xs">
-                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="notification-dot msg">4</span>
+                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" >
+                                   My Balance :  <i class="fa fa-dollar"></i>{{ getMyBalance(auth()->id())}}
                                 </a>
-                                <ul class="dropdown-menu right_chat email mt-0 animation-li-delay">
-                                    <li class="header theme-bg gradient mt-0 text-light">You have 4 New eMail</li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="media">
-                                                <img class="media-object " src="{{ 'backend' }}/assets/images/xs/avatar4.jpg" alt="">
-                                                <div class="media-body">
-                                                    <span class="name">James Wert <small class="float-right font-12">Just now</small></span>
-                                                    <span class="message">Update GitHub</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="media">
-                                                <img class="media-object" src="{{ 'backend' }}/assets/images/xs/avatar1.jpg" alt="">
-                                                <div class="media-body">
-                                                    <span class="name">Folisise Chosielie <small class="float-right font-12">12min ago</small></span>
-                                                    <span class="message">New Messages</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="media">
-                                                <img class="media-object" src="{{ 'backend' }}/assets/images/xs/avatar5.jpg" alt="">
-                                                <div class="media-body">
-                                                    <span class="name">Louis Henry <small class="float-right font-12">38min ago</small></span>
-                                                    <span class="message">Design bug fix</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="media mb-0">
-                                                <img class="media-object" src="assets/images/xs/avatar2.jpg" alt="">
-                                                <div class="media-body">
-                                                    <span class="name">Debra Stewart <small class="float-right font-12">2hr ago</small></span>
-                                                    <span class="message">Fix Bug</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
+
                             </li>
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">

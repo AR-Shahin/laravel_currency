@@ -33,8 +33,17 @@
                             <td></td>
                         </tr>
                     </table>
+
                 </div>
             </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                <div class="card-header">My Balance</div>
+                <div class="card-body">
+                    <h5 class="card-title">Balance : $ {{ getMyBalance(auth()->id())}}</h5>
+                </div>
+                </div>
         </div>
     </div>
 </div>

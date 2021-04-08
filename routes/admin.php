@@ -26,4 +26,5 @@ Route::get('get-currency',[CurrencyController::class,'getAllCurrency'])->middlew
 
 //User Routes
 Route::get('get-all-users', [UserController::class,'index'])->name('get-all-users');
-
+Route::get('add-money/{email}', [UserController::class, 'addMoney'])->name('add-money');
+Route::post('add-money', [UserController::class, 'addMoneyInUser'])->name('add-money');
