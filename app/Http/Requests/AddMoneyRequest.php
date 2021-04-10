@@ -25,7 +25,8 @@ class AddMoneyRequest extends FormRequest
     {
         return [
             'amount' => ['required','numeric'],
-            'user_id' => ['required']
+            'user_id' => ['required'],
+            'password' =>['required']
         ];
     }
 }

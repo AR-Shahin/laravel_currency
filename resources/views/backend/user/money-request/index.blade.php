@@ -19,13 +19,14 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Date</th>
+                                    <th>Client</th>
                                     <th>Email</th>
                                     <th>Amount</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="currencyTable"></tbody>
+                            <tbody id="moneyRequestTable"></tbody>
                         </table>
                     </div>
                 </div>
@@ -93,26 +94,47 @@
 @push('script')
 <script src="http://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script>
+        //initially add button is disable
+         $('#addButton').attr('disabled', true);
         //let base_path = window.location.origin
         function table_data_row(data) {
             var	rows = '';
             var i = 0;
             $.each( data, function( key, value ) {
-                value.id
+
                 rows = rows + '<tr>';
                 rows = rows + '<td>'+ ++i +'</td>';
-                rows = rows + '<td>USD</td>';
-                rows = rows + '<td>'+value.country+'</td>';
-                rows = rows + '<td>'+value.ammount+'</td>';
+                rows = rows + '<td>'+value.created_at+'</td>';
+                rows = rows + '<td>'+value.user.name+'</td>';
+                rows = rows + '<td>'+value.user.email+'</td>';
+                rows = rows + '<td>'+value.amount+'</td>';
+                rows += '<td>'
+                    value.status
+                if(value.status == 0) {
+                    rows += '<span class="badge badge-warning">Unapproved</span>'
+                }else if(value.status == 1){
+                    rows += '<span class="badge badge-success">Approved</span>'
+                }
+                rows += '</td>'
                 rows = rows + '<td data-id="'+value.id+'" class="text-center">';
                 rows = rows + '<a class="btn btn-sm btn-info text-light" id="editRow" data-id="'+value.id+'" data-toggle="modal" data-target="#editModal">Edit</a> ';
                 rows = rows + '<a class="btn btn-sm btn-danger text-light"  id="deleteRow" data-id="'+value.id+'" >Delete</a> ';
                 rows = rows + '</td>';
                 rows = rows + '</tr>';
             });
-            $("#currencyTable").html(rows);
+            $("#moneyRequestTable").html(rows);
     }
- $('#addButton').attr('disabled', true);
+
+    //get-all-money-request
+    function getAllMoneyRequest(){
+        axios.get("{{ route('user.get-all-money-request') }}")
+        .then((res) => {
+            table_data_row(res.data)
+           // console.log(res.data);
+             $('.dataTable').DataTable();
+        })
+    }
+    getAllMoneyRequest()
     //check email valid or not
     $('body').on('blur','#email',function(){
         let email = $(this).val();
@@ -144,11 +166,37 @@
 //request form submit
     $('body').on('submit','#addMoneyRequestForm',function(e){
         e.preventDefault();
+        $('#amntError').text('');
+         $('#passwordError').text('');
         let data = {
             user_id : $('#user_id').val(),
             amount : $('#ammount').val(),
             password : $('#password').val()
         }
+        axios.post("{{ route('user.money-request') }}",data)
+        .then(function(res){
+            if(res.data.flag === 'INCORRECT_PASSWORD'){
+                setSwalMessage(mode = 'error', title = 'Error', text = 'Invalid Password!')
+            }
+            if(res.data.flag === 'INSERTED'){
+                getAllMoneyRequest();
+                setSwalMessage(mode = 'success', title = 'success', text = 'Request Send Successfully!');
+                $('#email').val('')
+                $('#ammount').val('')
+                $('#password').val('')
+                $('#emailSuccess').text('')
+                $('.modal').modal('toggle')
+            }
+          //  console.log(res);
+        })
+        .catch(function(error){
+            if(error.response.data.errors.amount){
+                $('#amntError').text(error.response.data.errors.amount[0]);
+            }
+            else if(error.response.data.errors.password){
+                $('#passwordError').text(error.response.data.errors.password[0]);
+            }
+        })
     })
     </script>
 @endpush
