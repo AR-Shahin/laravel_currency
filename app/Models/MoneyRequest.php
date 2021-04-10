@@ -23,4 +23,9 @@ class MoneyRequest extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function authUser()
+    {
+        return $this->belongsTo(User::class,'auth_id','id');
+    }
 }
+

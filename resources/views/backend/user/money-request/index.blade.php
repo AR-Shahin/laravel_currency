@@ -115,10 +115,13 @@
                 }else if(value.status == 1){
                     rows += '<span class="badge badge-success">Approved</span>'
                 }
+                else if(value.status == 2){
+                    rows += '<span class="badge badge-danger">Unsufficient</span>'
+                }
                 rows += '</td>'
 
                 rows = rows + '<td data-id="'+value.id+'" class="text-center">';
-                 if(value.status == 0) {
+                 if(value.status == 0 || value.status == 2 ) {
                 rows = rows + '<a class="btn btn-sm btn-danger text-light"  id="deleteRow" data-id="'+value.id+'" >Delete</a> ';
                 }
                 rows = rows + '</td>';

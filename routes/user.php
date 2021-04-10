@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\User\Auth\LoginController;
-use App\Http\Controllers\User\DashboardController;
-use App\Http\Controllers\User\Auth\RegistrationController;
-use App\Http\Controllers\User\MoneyRequestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\Auth\LoginController;
+use App\Http\Controllers\User\MoneyRequestController;
+use App\Http\Controllers\User\ReceiveRequestController;
+use App\Http\Controllers\User\Auth\RegistrationController;
 
 Route::view('user', 'backend.user.auth.registration');
 
@@ -23,13 +24,21 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
         //Dashboard Routes
         Route::get('dashboard',[DashboardController::class,'dashboard'])->name('dashboard');
+
+        //sent money request routes
         Route::get('money-request', [MoneyRequestController::class, 'index'])->name('money-request');
         Route::get('check-email/{email}', [MoneyRequestController::class, 'checkValidEmail'])->name('check-email');
         Route::post('money-request', [MoneyRequestController::class, 'storeMoneyRequest'])->name('money-request');
         Route::get('get-money-request', [MoneyRequestController::class, 'getAllMoneyRequestViaUserId'])->name('get-all-money-request');
         Route::delete('delete-money-request/{id}', [MoneyRequestController::class, 'deleteMoneyRequest'])->name('delete-money-request');
+
+        //receive money request routes
+        Route::get('receive-money-request', [ReceiveRequestController::class, 'index'])->name('receive-money-request');
+        Route::get('receive-all-money-request', [ReceiveRequestController::class, 'getAllMoneyReceivedRequestViaUserId'])->name('receive-all-money-request');
+        Route::put('approve-money-request/{money}', [ReceiveRequestController::class, 'approveMoneyRequest'])->name('approve-money-request');
     });
 
 });
+
 
 

@@ -20,6 +20,7 @@
                             <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>Merchant</span></a></li>
                         @endcan
                         <li><a href="{{ route('user.money-request') }}"><i class="fa fa-dollar"></i> <span>Money Request</span></a></li>
+                        <li><a href="{{ route('user.receive-money-request') }}"><i class="fa fa-dollar"></i> <span>Receive Request</span></a></li>
                     </ul>
                 </nav>
             </div>
