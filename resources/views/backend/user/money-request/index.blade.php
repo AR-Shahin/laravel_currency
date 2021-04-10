@@ -116,9 +116,11 @@
                     rows += '<span class="badge badge-success">Approved</span>'
                 }
                 rows += '</td>'
+
                 rows = rows + '<td data-id="'+value.id+'" class="text-center">';
-                rows = rows + '<a class="btn btn-sm btn-info text-light" id="editRow" data-id="'+value.id+'" data-toggle="modal" data-target="#editModal">Edit</a> ';
+                 if(value.status == 0) {
                 rows = rows + '<a class="btn btn-sm btn-danger text-light"  id="deleteRow" data-id="'+value.id+'" >Delete</a> ';
+                }
                 rows = rows + '</td>';
                 rows = rows + '</tr>';
             });
@@ -198,5 +200,50 @@
             }
         })
     })
+
+
+    //delete request
+     $('body').on('click','#deleteRow',function (e) {
+            e.preventDefault();
+             let id = $(this).data('id')
+             let url =  main_path + '/user/delete-money-request' + '/' + id
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success mx-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+              axios.delete(url).then(function(r){
+                getAllMoneyRequest();
+                 swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Your data has been deleted.',
+                            'success'
+                        )
+            });
+            } else if (
+                    /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your file is safe :)',
+                    'error'
+                )
+            }
+        })
+        });
     </script>
 @endpush

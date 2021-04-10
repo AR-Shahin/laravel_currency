@@ -47,4 +47,8 @@ class MoneyRequestController extends Controller
     public function getAllMoneyRequestViaUserId(){
         return MoneyRequest::with('user')->where('auth_id',auth()->id())->latest()->get();
     }
+    public function deleteMoneyRequest($id)
+    {
+        return MoneyRequest::find($id)->delete();
+    }
 }

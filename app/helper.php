@@ -37,3 +37,8 @@ if(!function_exists('getMyBalance')){
         return $balance ? $balance->amount : 0;
     }
 }
+
+
+function test($id){
+    return $id;
+}

@@ -27,6 +27,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('check-email/{email}', [MoneyRequestController::class, 'checkValidEmail'])->name('check-email');
         Route::post('money-request', [MoneyRequestController::class, 'storeMoneyRequest'])->name('money-request');
         Route::get('get-money-request', [MoneyRequestController::class, 'getAllMoneyRequestViaUserId'])->name('get-all-money-request');
+        Route::delete('delete-money-request/{id}', [MoneyRequestController::class, 'deleteMoneyRequest'])->name('delete-money-request');
     });
 
 });
