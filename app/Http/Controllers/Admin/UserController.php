@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddMoneyRequest;
+use App\Http\Requests\CustomMoneyAddRequest;
 use App\Models\Balance;
 use App\Models\User;
 use Exception;
@@ -20,7 +21,7 @@ class UserController extends Controller
     {
         return view()->exists('backend.admin.user.add-money') ? view('backend.admin.user.add-money')->with(['user' => $email]) : abort(404);
     }
-    public function addMoneyInUser(AddMoneyRequest $request)
+    public function addMoneyInUser(CustomMoneyAddRequest $request)
     {
         $data = $request->validated();
         $user =  Balance::select('id','amount')->where('user_id',$request->input('user_id'))->first();
@@ -31,11 +32,11 @@ class UserController extends Controller
             }else{
                 Balance::create($data);
             }
+            $this->setSuccessMessageForDashboard('Money Save Successfully!');
+            return back();
         }
         catch (Exception $e){
             return $e->getMessage();
         }
-        $this->setSuccessMessageForDashboard('Money Save Successfully!');
-        return back();
     }
 }

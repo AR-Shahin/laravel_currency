@@ -25,11 +25,19 @@ class ReceiveRequestController extends Controller
             return response()->json(['flag' => 'INSUFFICIENT_BALANCE']);
         }else{
             $balance = Balance::where('user_id',auth()->id())->decrement('amount',$money->amount);
+            $send = Balance::where('user_id', $money->auth_id)->increment('amount', $money->amount);
+            if(!$send){
+                $b = new Balance();
+                $b->user_id = $money->auth_id;
+                $b->amount = $money->amount;
+                $b->save();
+            }
             if($balance){
                 $money->status = 1;
                 $money->save();
+                return response()->json(['flag' => 'APPROVED_REQUEST']);
             }
-            return response()->json(['flag' => 'APPROVED_REQUEST']);
+
         }
     }
 }

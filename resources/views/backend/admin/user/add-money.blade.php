@@ -13,21 +13,21 @@
                     <a href="{{ route('get-all-users') }}" class="btn btn-sm btn-info ml-5">Back</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('add-money') }}" method="POST">
+                    <form action="{{ route('add-money') }}" method="POST" id="addMoneyForm">
                         @csrf
                        <div class="row">
                            <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">Amount : </label>
-                                    <input type="text" class="form-control" placeholder="Enter Amount" name="amount">
+                                    <input type="text" class="form-control" placeholder="Enter Amount" name="amount" id="amount">
                                       <span class="text-danger">{{($errors->has('amount'))? ($errors->first('amount')) : ''}}</span>
                                 </div>
                            </div>
                            <div class="col-12 col-md-6 mt-2">
-                               <input type="hidden" value="{{ $user->id }}" name="user_id">
+                               <input type="hidden" value="{{ $user->id }}" name="user_id" id="user_id">
                                <label for=""></label>
                                <div class="form-group">
-                                   <button class="btn btn-sm btn-block btn-success">Add Money</button>
+                                   <button type="submit" class="btn btn-sm btn-block btn-success">Add Money</button>
                                </div>
                            </div>
                        </div>
