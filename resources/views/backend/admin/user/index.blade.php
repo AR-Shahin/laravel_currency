@@ -38,6 +38,7 @@
                                             <a href="" class="btn btn-sm btn-danger">Delete</a>
                                             <a href="" class="btn btn-sm btn-warning">Block</a>
                                             <a href="{{ url('add-money' . '/' .$user->email) }}" class="btn btn-sm btn-secondary">Add Money</a>
+                                             <a href="{{ url('user-all-transaction' . '/' .$user->id) }}" class="btn btn-sm btn-info">History</a>
                                         </td>
                                     </tr>
                                 @empty

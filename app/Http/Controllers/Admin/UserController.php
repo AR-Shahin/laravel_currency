@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddMoneyRequest;
 use App\Http\Requests\CustomMoneyAddRequest;
 use App\Models\Balance;
+use App\Models\MoneyRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -39,4 +40,16 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
+
+    public function userAllTransactionHistory($id)
+    {
+        if(!$user = User::where('id',$id)->first()){
+            abort(404);
+        }
+        $data['user'] = $user;
+        $data['send_requests'] = MoneyRequest::with(['user'])->where('auth_id',$id)->latest()->get();
+        $data['receive_requests'] = MoneyRequest::with(['authUser'])->where('user_id', $id)->latest()->get();
+        return view()->exists('backend.admin.user.history') ? view('backend.admin.user.history',$data) : abort(404);
+    }
+
 }

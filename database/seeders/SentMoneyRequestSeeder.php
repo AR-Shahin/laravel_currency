@@ -16,8 +16,8 @@ class SentMoneyRequestSeeder extends Seeder
     {
         for ($i=0; $i < 100; $i++) {
             $money = new MoneyRequest();
-            $money->user_id = rand(1,10);
-            $money->auth_id = rand(1,10);
+            $money->user_id = rand(1,8);
+            $money->auth_id = rand(1,8);
             $money->amount =rand(100, 1000);
             $money->save();
         }
