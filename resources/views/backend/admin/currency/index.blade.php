@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
 </div>
 
@@ -100,7 +100,7 @@
 
 @push('script')
 <script src="http://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script>
+<script>
         function table_data_row(data) {
             var	rows = '';
             var i = 0;
@@ -134,7 +134,7 @@
         $('body').on('click','#deleteRow',function (e) {
             e.preventDefault();
              let id = $(this).data('id')
-            let url = base_path + '/currency/' + id  
+            let url = base_path + '/currency/' + id
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success mx-2',
@@ -152,8 +152,8 @@
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    
-              axios.delete(url).then(function(r){ 
+
+              axios.delete(url).then(function(r){
                 getAllCurrency();
                  swalWithBootstrapButtons.fire(
                             'Deleted!',
@@ -173,18 +173,18 @@
             }
         })
         });
-        
-        
+
+
         //store
 
         $('body').on('submit','#addCurrencyForm',function(e){
         e.preventDefault();
-     
+
         let countryError = $('#nameError')
         let amountError = $('#amntError')
         countryError.text('')
         amountError.text('')
-        
+
         axios.post("{{ route('currency.store') }}", {
             country: $('#country').val(),
             ammount : $('#ammount').val()
@@ -196,7 +196,7 @@
              setSwalMessage()
           // console.log(response.data)
           $('.modal').modal('toggle')
-           
+
         })
         .catch(function (error) {
             if(error.response.data.errors.country){
@@ -215,7 +215,7 @@
 
     //edit
     $('body').on('click','#editRow',function(){
-      
+
         let id = $(this).data('id')
         let url = base_path + '/currency' + '/'  + id + '/edit'
        // console.log(url);
@@ -237,14 +237,14 @@
             country : $('#e_country').val(),
             ammount : $('#e_ammount').val()
         }
-        let url = base_path + '/currency' + '/'  + id 
+        let url = base_path + '/currency' + '/'  + id
 
         axios.put(url,data)
         .then(function(res){
             getAllCurrency();
              $('#editModal').modal('toggle')
             setSwalMessage('success','Success','Data Update Successfully!');
-           
+
             //console.log(res);
         })
     })

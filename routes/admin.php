@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MoneyRequestController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,6 @@ Route::get('get-currency',[CurrencyController::class,'getAllCurrency'])->middlew
 Route::get('get-all-users', [UserController::class,'index'])->name('get-all-users');
 Route::get('add-money/{email}', [UserController::class, 'addMoney'])->name('add-money');
 Route::post('add-money', [UserController::class, 'addMoneyInUser'])->name('add-money');
+
+//Money Request Routes
+Route::get('get-all-money-request',[MoneyRequestController::class, 'index'])->name('get-all-money-request');
