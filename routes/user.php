@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\MoneyRequestController;
@@ -36,6 +37,9 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('receive-money-request', [ReceiveRequestController::class, 'index'])->name('receive-money-request');
         Route::get('receive-all-money-request', [ReceiveRequestController::class, 'getAllMoneyReceivedRequestViaUserId'])->name('receive-all-money-request');
         Route::put('approve-money-request/{money}', [ReceiveRequestController::class, 'approveMoneyRequest'])->name('approve-money-request');
+
+        //get all currency
+        Route::get('get-all-currency-for-request',[CurrencyController::class,'getAllCurrency'])->name('get-all-currency-for-request');
     });
 
 });

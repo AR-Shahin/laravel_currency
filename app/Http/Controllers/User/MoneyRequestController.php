@@ -36,6 +36,7 @@ class MoneyRequestController extends Controller
             try{
                 $money = new MoneyRequest();
                 $money->user_id = $request->input('user_id');
+                $money->currency_id = $request->input('currency_id');
                 $money->auth_id = auth()->id();
                 $money->amount = $request->input('amount');
                 $money->save();
@@ -46,7 +47,7 @@ class MoneyRequestController extends Controller
         }
     }
     public function getAllMoneyRequestViaUserId(){
-        return MoneyRequest::with('user')->where('auth_id',auth()->id())->latest()->get();
+        return MoneyRequest::with('user','currency')->where('auth_id',auth()->id())->latest()->get();
     }
     public function deleteMoneyRequest($id)
     {

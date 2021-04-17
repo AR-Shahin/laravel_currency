@@ -26,7 +26,13 @@ class AddMoneyRequest extends FormRequest
         return [
             'amount' => ['required','numeric'],
             'user_id' => ['required'],
+            'currency_id' => ['required'],
             'password' =>['required']
+        ];
+    }
+    public function messages(){
+        return [
+            'currency_id.required' => 'This field is required!'
         ];
     }
 }

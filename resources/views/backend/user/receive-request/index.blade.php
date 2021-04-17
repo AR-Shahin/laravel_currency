@@ -21,6 +21,7 @@
                                     <th>Client</th>
                                     <th>Email</th>
                                     <th>Amount</th>
+                                    <th>Currency</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -52,6 +53,7 @@
                 rows = rows + '<td>'+value.auth_user.name+'</td>';
                 rows = rows + '<td>'+value.auth_user.email+'</td>';
                 rows = rows + '<td>'+value.amount+'</td>';
+                  rows = rows + '<td>'+value.currency.country+'</td>';
                 rows += '<td>'
                     value.status
                 if(value.status == 0) {

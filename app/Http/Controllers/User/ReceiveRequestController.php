@@ -15,7 +15,7 @@ class ReceiveRequestController extends Controller
 
     public function getAllMoneyReceivedRequestViaUserId()
     {
-        return MoneyRequest::with('authUser')->where('user_id', auth()->id())->latest()->get();
+        return MoneyRequest::with('authUser','currency')->where('user_id', auth()->id())->latest()->get();
     }
 
     public function approveMoneyRequest(MoneyRequest $money){

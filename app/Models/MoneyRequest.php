@@ -10,7 +10,7 @@ class MoneyRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['auth_id','user_id','amount','status'];
+    protected $fillable = ['auth_id','user_id','currency_id','amount','status'];
     public function getCreatedAtAttribute($value)
     {
         $carbonDate = new Carbon($value);
@@ -26,6 +26,10 @@ class MoneyRequest extends Model
     public function authUser()
     {
         return $this->belongsTo(User::class,'auth_id','id');
+    }
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }
 

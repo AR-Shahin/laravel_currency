@@ -21,6 +21,9 @@
                         @endcan
                         <li><a href="{{ route('user.money-request') }}"><i class="fa fa-dollar"></i> <span>Money Request</span></a></li>
                         <li><a href="{{ route('user.receive-money-request') }}"><i class="fa fa-dollar"></i> <span>Receive Request</span></a></li>
+                        @can('isUser')
+                        <li><a href="{{ route('user.receive-money-request') }}"><i class="fa fa-dollar"></i> <span>Cashout</span></a></li>
+                        @endcan
                     </ul>
                 </nav>
             </div>

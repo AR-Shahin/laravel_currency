@@ -17,6 +17,7 @@ class CreateMoneyRequestsTable extends Migration
             $table->id();
             $table->foreignId('auth_id')->index()->constrained('users')->onDelete('cascade');
             $table->foreignId('user_id')->index()->constrained('users')->onDelete('cascade');
+            $table->foreignId('currency_id')->index()->constrained('currencies')->onDelete('cascade');
             $table->float('amount',50);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

@@ -22,6 +22,7 @@
                                     <th>Client</th>
                                     <th>Email</th>
                                     <th>Amount</th>
+                                    <th>Currency</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -49,7 +50,17 @@
       <div class="modal-body">
            <form action="" id="addMoneyRequestForm" autocomplete="false">
                         <div class="form-group">
-                           <input type="text" class="form-control" id="requestUserName" readonly>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                     <input type="text" class="form-control" id="requestUserName" readonly>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <select name="" id="currency_id" class="form-control">
+                                        <option value="">Select a Currency</option>
+                                    </select>
+                                    <span id="currencyError" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
                          <div class="form-group">
                             <label for="">Email : </label>
@@ -102,6 +113,7 @@
                 rows = rows + '<td>'+value.user.name+'</td>';
                 rows = rows + '<td>'+value.user.email+'</td>';
                 rows = rows + '<td>'+value.amount+'</td>';
+                rows = rows + '<td>'+value.currency.country+'</td>';
                 rows += '<td>'
                     value.status
                 if(value.status == 0) {
@@ -148,6 +160,7 @@
                 $('#emailError').text('Invalid Email!')
                 $('#emailSuccess').text('')
                 $('#user_id').val('')
+                $('#requestUserName').val('')
                  $('#addButton').attr('disabled', true);
             }else if(response.data.user_id){
                 $('#emailError').text('')
@@ -169,8 +182,10 @@
         $('#amntError').text('');
         $('#passwordError').text('');
         $('#requestUserName').val('')
+        $('#currencyError').text('')
         let data = {
             user_id : $('#user_id').val(),
+            currency_id : $('#currency_id').val(),
             amount : $('#ammount').val(),
             password : $('#password').val()
         }
@@ -186,6 +201,7 @@
                 $('#ammount').val('')
                 $('#password').val('')
                 $('#emailSuccess').text('')
+                $('#currencyError').text('')
                 $('.modal').modal('toggle')
             }
           //  console.log(res);
@@ -196,6 +212,9 @@
             }
             else if(error.response.data.errors.password){
                 $('#passwordError').text(error.response.data.errors.password[0]);
+            }
+            else if(error.response.data.errors.currency_id){
+                $('#currencyError').text(error.response.data.errors.currency_id[0]);
             }
         })
     })
@@ -244,5 +263,20 @@
             }
         })
         });
+
+        //get all currency
+        function getAllCurrency(){
+            axios.get("{{ route('user.get-all-currency-for-request') }}")
+            .then(function(res){
+                console.log(res.data);
+              html = '<option value="">Select a Currency</option>'
+              $.each(res.data,(key,item)=>{
+                html += '<option value="'+item.id+'">'+item.country+' -- ('+item.ammount+')</option>'
+              })
+            $('#currency_id').html(html)
+            })
+        }
+        getAllCurrency();
+
     </script>
 @endpush
