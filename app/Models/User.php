@@ -47,5 +47,9 @@ class User extends Authenticatable
     public function scopeIsVerified($query){
         return $query->where('is_verified',1);
     }
+    public function scopeIsMerchant($query)
+    {
+        return $query->where('role', 'merchant');
+    }
 
 }

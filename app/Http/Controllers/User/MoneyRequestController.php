@@ -42,7 +42,7 @@ class MoneyRequestController extends Controller
                 $money->save();
                 return response()->json(['flag' => 'INSERTED']);
             }catch(Exception $e){
-
+                
             }
         }
     }

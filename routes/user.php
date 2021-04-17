@@ -7,6 +7,7 @@ use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\MoneyRequestController;
 use App\Http\Controllers\User\ReceiveRequestController;
 use App\Http\Controllers\User\Auth\RegistrationController;
+use App\Http\Controllers\User\CashOutController;
 
 Route::view('user', 'backend.user.auth.registration');
 
@@ -40,6 +41,15 @@ Route::prefix('user')->name('user.')->group(function () {
 
         //get all currency
         Route::get('get-all-currency-for-request',[CurrencyController::class,'getAllCurrency'])->name('get-all-currency-for-request');
+
+        //CashOut Routes
+        Route::middleware('can:isUser')->group(function () {
+            Route::get('cashout', [CashOutController::class, 'index'])->name('cashout');
+            Route::post('cashout', [CashOutController::class, 'storeCashOutRequest'])->name('cashout');
+            Route::get('check-merchant-email/{email}', [CashOutController::class, 'checkValidEmail'])->name('check-email');
+            Route::get('get-all-cashout-history-of-an-singer-user', [CashOutController::class, 'getAllCashOutHistoryViaUserId'])->name('get-all-cashout-history-of-an-singer-user');
+        });
+
     });
 
 });
