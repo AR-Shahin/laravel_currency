@@ -49,13 +49,7 @@
       <div class="modal-body">
            <form action="" id="addMoneyRequestForm" autocomplete="false">
                         <div class="form-group">
-                            <label for="">User : </label>
-                            <select name="user" id="user" class="form-control">
-                                <option value="">Select a User</option>
-                                <option value="">Normal User</option>
-                                <option value="">Marchent</option>
-                            </select>
-                            <span id="nameError" class="text-danger"></span>
+                           <input type="text" class="form-control" id="requestUserName" readonly>
                         </div>
                          <div class="form-group">
                             <label for="">Email : </label>
@@ -159,9 +153,10 @@
                 $('#emailError').text('')
                 $('#emailSuccess').text('Valid Email')
                 $('#user_id').val(response.data.user_id)
-                 $('#addButton').attr('disabled', false);
+                $('#requestUserName').val(response.data.name)
+                $('#addButton').attr('disabled', false);
             }
-          //  console.log(response);
+            console.log(response);
         })
         .catch(function (error) {
             // handle error
@@ -172,7 +167,8 @@
     $('body').on('submit','#addMoneyRequestForm',function(e){
         e.preventDefault();
         $('#amntError').text('');
-         $('#passwordError').text('');
+        $('#passwordError').text('');
+        $('#requestUserName').val('')
         let data = {
             user_id : $('#user_id').val(),
             amount : $('#ammount').val(),

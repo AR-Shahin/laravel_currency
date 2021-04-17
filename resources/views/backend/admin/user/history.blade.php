@@ -77,7 +77,7 @@
                             <tr>
                                 <td>{{ $loop->index +1 }}</td>
                                 <td>{{ $request->created_at }}</td>
-                                <td>{{ $request->user->name }}</td>
+                                <td>{{ $request->authUser->name }}</td>
                                 <td>{{ $request->amount }}</td>
                                 <th>
                                     @if($request->status == 0)

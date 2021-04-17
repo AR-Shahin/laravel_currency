@@ -15,9 +15,9 @@
                         <li class="header">Main</li>
                         <li class="active"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                         @can('isUser')
-                            <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>User</span></a></li>
+                            <li><a href=""><i class="fa fa-dollar"></i> <span>User</span></a></li>
                         @else
-                            <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>Merchant</span></a></li>
+                            <li><a href=""><i class="fa fa-dollar"></i> <span>Merchant</span></a></li>
                         @endcan
                         <li><a href="{{ route('user.money-request') }}"><i class="fa fa-dollar"></i> <span>Money Request</span></a></li>
                         <li><a href="{{ route('user.receive-money-request') }}"><i class="fa fa-dollar"></i> <span>Receive Request</span></a></li>

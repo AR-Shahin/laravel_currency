@@ -16,10 +16,11 @@ class MoneyRequestController extends Controller
         return view()->exists('backend.user.money-request.index') ? view('backend.user.money-request.index') : abort(404);
     }
     public function checkValidEmail($email){
-        $user = User::select('id')->whereEmail($email)->where('email' , '!=' ,auth()->user()->email)->first();
+        $user = User::select('id','name')->whereEmail($email)->where('email' , '!=' ,auth()->user()->email)->first();
         if($user){
             return response()->json([
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'name' => $user->name
             ]);
         }else{
             return response()->json([
