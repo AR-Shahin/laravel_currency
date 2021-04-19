@@ -17,8 +17,9 @@
                         <li><a href="{{ route('currency.index') }}"><i class="fa fa-dollar"></i> <span>Currency</span></a></li>
                      <li><a href="{{ route('get-all-users') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
                        <li><a href="{{ route('get-all-money-request') }}"><i class="fa fa-users"></i> <span>Money Requests</span></a></li>
-
+   <li><a href="{{ route('admin-cashout') }}"><i class="fa fa-dollar"></i> <span>Cashout</span></a></li>
                     </ul>
                 </nav>
             </div>
         </div>
+

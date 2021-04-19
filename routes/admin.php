@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\CashOutController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MoneyRequestController;
@@ -33,3 +34,6 @@ Route::get('user-all-transaction/{id}', [UserController::class, 'userAllTransact
 
 //Money Request Routes
 Route::get('get-all-money-request',[MoneyRequestController::class, 'index'])->name('get-all-money-request');
+
+//Cashout
+Route::get('admin-cashout', [CashOutController::class, 'indexCashOut'])->name('admin-cashout');

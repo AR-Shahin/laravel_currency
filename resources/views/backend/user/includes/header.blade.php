@@ -13,7 +13,7 @@
                 <div class="navbar-right">
                     <div id="navbar-menu">
                         <ul class="nav navbar-nav">
-                            <li><a href="javascript:void(0);" class="right_note icon-menu" title="Right Menu">{{ auth()->user()->name }}</a></li>
+                            <li><a href="javascript:void(0);" class="right_note icon-menu" title="Right Menu">{{ auth()->user()->name ?? '' }}</a></li>
                             <li class="dropdown hidden-xs">
                                 <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">Create</a>
                                 <div class="dropdown-menu pb-0 mt-0">
