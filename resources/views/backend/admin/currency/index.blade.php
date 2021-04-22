@@ -35,7 +35,7 @@
 </div>
 
 
- <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal addModal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="addModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -195,7 +195,7 @@
              $('#ammount').val('')
              setSwalMessage()
           // console.log(response.data)
-          $('.modal').modal('toggle')
+          $('#addModal').modal('toggle')
 
         })
         .catch(function (error) {

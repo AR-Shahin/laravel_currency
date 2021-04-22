@@ -19,12 +19,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Auth Routes
     Route::get('login',[LoginController::class,'showLoginForm'])->middleware('guest:admin')->name('login');
     Route::post('login', [LoginController::class, 'processLogin'])->name('login');
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth:admin');
 });
 
 //Currency Routes
 Route::resource('currency', CurrencyController::class)->middleware('auth:admin');
 Route::get('get-currency',[CurrencyController::class,'getAllCurrency'])->middleware('auth:admin')->name('get-all-currency');
+
+Route::middleware('auth:admin')->group(function () {
+
 
 //User Routes
 Route::get('get-all-users', [UserController::class,'index'])->name('get-all-users');
@@ -37,3 +40,5 @@ Route::get('get-all-money-request',[MoneyRequestController::class, 'index'])->na
 
 //Cashout
 Route::get('admin-cashout', [CashOutController::class, 'indexCashOut'])->name('admin-cashout');
+
+});
